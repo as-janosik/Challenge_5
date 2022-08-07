@@ -1,7 +1,7 @@
 //loop through and add time rows and check agaist moment() to color code 9-5pm calendar day.
 //dont forget to add event listeners to 3rd column for button clicks. 
 //set colors Past=Red, Curernt = grey, Future = Green
-var hours = ["09", "10", "11", "12", "13", "14", "15", "16", "17"];
+var hours = ["00","01","09", "10", "11", "12", "13", "14", "15", "16", "17"];
 var containerEl = $(".container");
 
 for (var i = 0; i < hours.length; i++) {
@@ -10,27 +10,11 @@ for (var i = 0; i < hours.length; i++) {
         //past set colors grey
         console.log("grey " + hours[i] + " -is less than- " + currentCheck);
 
-        // <div class="container">
-        //   <div class="row">
-        //     <div class="col-sm">
-        //       One of three columns 
-        //     </div>
-        //     <div class="col-sm">
-        //       One of three columns
-        //     </div>
-        //     <div class="col-sm">
-        //       One of three columns
-        //     </div>
-        //   </div>
-        // </div>
-
         var divEl = $("<div>");
         divEl.addClass("row");
         divEl.addClass("past");
         divEl.appendTo(containerEl);
-
-
-
+        setCol(divEl,i);
 
     } else if (hours[i] == currentCheck) {
         //currrrent set colors red
@@ -39,21 +23,49 @@ for (var i = 0; i < hours.length; i++) {
         divEl.addClass("row");
         divEl.addClass("present");
         divEl.appendTo(containerEl);
+        setCol(divEl,i);
 
     } else {
         //future set colors green
         console.log("green " + hours[i] + " -is greater than- " + currentCheck);
-
+        //Set Row
         var divEl = $("<div>");
         divEl.addClass("row");
         divEl.addClass("future");
         divEl.appendTo(containerEl);
 
-
-
-
+        //Set Columns
+        setCol(divEl,i);
     }
 }
+
+function setCol(el,i){
+    for (var y=0; y < 3; y++){
+        if (y==0){
+            //set time in col 1
+            var col1 = $("<div>");
+            col1.addClass("hour");
+            col1.addClass("col").text(hours[i]);
+            col1.appendTo(el);
+
+        }else if (y==1){
+            //set text from saved file or provide input option
+            var col2 = $("<div>");
+
+            col2.addClass("col-9").text("col-2 placeholder");
+            col2.appendTo(el);
+
+        }else{
+            //set save button click event
+            var col3 = $("<div>");
+            col3.addClass("saveBtn");
+            col3.addClass("col").text("SAVE");
+            col3.appendTo(el);
+
+        }
+    }
+}
+
 
 //header time display
 function displayTime() {
