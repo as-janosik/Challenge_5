@@ -1,14 +1,14 @@
 //loop through and add time rows and check agaist moment() to color code 9-5pm calendar day.
 //dont forget to add event listeners to 3rd column for button clicks. 
 //set colors Past=Red, Curernt = grey, Future = Green
-var hours = ["00","01","09", "10", "11", "12", "13", "14", "15", "16", "17"];
+var hours = ["08","09", "10", "11", "12", "13", "14", "15", "16", "17"];
 var containerEl = $(".container");
 
 for (var i = 0; i < hours.length; i++) {
     var currentCheck = moment().format("HH");
     if (hours[i] < currentCheck) {
         //past set colors grey
-        console.log("grey " + hours[i] + " -is less than- " + currentCheck);
+        //console.log("grey " + hours[i] + " -is less than- " + currentCheck);
 
         var divEl = $("<div>");
         divEl.addClass("row");
@@ -18,7 +18,7 @@ for (var i = 0; i < hours.length; i++) {
 
     } else if (hours[i] == currentCheck) {
         //currrrent set colors red
-        console.log("red " + hours[i] + " -is equal to- " + currentCheck);
+        //console.log("red " + hours[i] + " -is equal to- " + currentCheck);
         var divEl = $("<div>");
         divEl.addClass("row");
         divEl.addClass("present");
@@ -27,7 +27,7 @@ for (var i = 0; i < hours.length; i++) {
 
     } else {
         //future set colors green
-        console.log("green " + hours[i] + " -is greater than- " + currentCheck);
+        //console.log("green " + hours[i] + " -is greater than- " + currentCheck);
         //Set Row
         var divEl = $("<div>");
         divEl.addClass("row");
@@ -50,10 +50,14 @@ function setCol(el,i){
 
         }else if (y==1){
             //set text from saved file or provide input option
-            var col2 = $("<div>");
+            //var col2 = $("<div>");
+            //var inputEl = $("<input type='text' name='todo' id='todo'>");
+            var inputEl = $('<textarea class="col-9" name="textInput" rows="1" cols="50"></textarea>');
+            
 
-            col2.addClass("col-9").text("col-2 placeholder");
-            col2.appendTo(el);
+            //col2.addClass("col-9").text("col-2 placeholder");
+            //inputEl.appendTo(col2);//needed to be after adding class to div for this to work. 
+            inputEl.appendTo(el);
 
         }else{
             //set save button click event
@@ -61,11 +65,15 @@ function setCol(el,i){
             col3.addClass("saveBtn");
             col3.addClass("col").text("SAVE");
             col3.appendTo(el);
+            //$(".saveBtn").on("click", clickSave);
 
         }
     }
 }
 
+function clickSave(){
+    console.log("Save has been initiated.");
+}
 
 //header time display
 function displayTime() {
