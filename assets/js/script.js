@@ -63,6 +63,7 @@ function setCol(el,i){
             //set save button click event
             var col3 = $("<div>");
             col3.addClass("saveBtn");
+            col3.prop('id',hours[i]);
             col3.addClass("col").text("SAVE");
             col3.appendTo(el);
             //$(".saveBtn").on("click", clickSave);
@@ -72,8 +73,15 @@ function setCol(el,i){
 }
 
 function clickSave(){
-    console.log("Save has been initiated.");
+    //console.log("Save has been initiated.");
+    var textValue = $(this).prev().val();//get value from sibling text area
+    var dateClick = moment().format('M.D.YYYY');
+    //console.log(dateClick);
+    var saveObject = {date: dateClick, timeVal: this.id, textval:textValue};
+
+    localStorage.setItem(dateClick, JSON.stringify(saveObject));
 }
+$(".saveBtn").on("click", clickSave);
 
 //header time display
 function displayTime() {
